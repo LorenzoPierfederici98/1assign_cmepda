@@ -17,9 +17,10 @@
 """First assignment for the CMEPDA course, 2022/23.
 """
 
-import matplotlib.pyplot as plt
 import argparse
 import re
+import matplotlib.pyplot as plt
+
 
 
 
@@ -30,10 +31,14 @@ def process(file_path):
     with open(file_path, 'r') as input_file:
         text = input_file.read()
 #    print(text)
-        findfrequency(text)
+        find_frequency(text)
     print('Done.')
 
 def histogram(dictionary):
+    """Mostra l'istogramma dei valori presenti in un dizionario.
+
+    Usato nella funzione findefrequency.
+    """
     plt.title('Istogramma delle frequenze relative')
     plt.xlabel('Lettere')
     plt.ylabel('Frequenze')
@@ -44,7 +49,11 @@ def histogram(dictionary):
     plt.show()
 
 
-def findfrequency(file):
+def find_frequency(file):
+    """Trova la frequenza relativa delle lettere dell'input file e ne stampa il grafico a barre.
+
+    Usato nella funzione process.
+    """
     letter_count = {}
     file = file.lower()
     n = float(len(file))
