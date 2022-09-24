@@ -17,7 +17,10 @@
 """First assignment for the CMEPDA course, 2022/23.
 """
 
+import matplotlib.pyplot as plt
 import argparse
+import re
+
 
 
 def process(file_path):
@@ -26,13 +29,41 @@ def process(file_path):
     print(f'Opening input file {file_path}...')
     with open(file_path, 'r') as input_file:
         text = input_file.read()
-    print(text)
+#    print(text)
+        findfrequency(text)
     print('Done.')
 
+def histogram(dictionary):
+    plt.title('Istogramma delle frequenze relative')
+    plt.xlabel('Lettere')
+    plt.ylabel('Frequenze')
+    dictionary = dictionary.items()
+    dictionary = sorted(dictionary)
+    x,y = zip(*dictionary)
+    plt.bar(x,y)
+    plt.show()
 
+
+def findfrequency(file):
+    letter_count = {}
+    file = file.lower()
+    n = float(len(file))
+    for letter in file:
+        match = re.search("[a-z]", letter)
+        boolean = bool(match)
+        if boolean:
+            if letter in letter_count:
+                letter_count[letter] +=1
+            else : letter_count[letter] = 1
+    for letter in letter_count:
+        letter_count[letter] = float(letter_count[letter]*100/n)
+   # print(letter_count)
+    histogram(letter_count)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Print some book statistics')
     parser.add_argument('infile', type=str, help='path to the input file')
     args = parser.parse_args()
     process(args.infile)
+    
+     
