@@ -41,7 +41,7 @@ def histogram(dictionary):
     """
     plt.title('Istogramma delle frequenze relative')
     plt.xlabel('Lettere')
-    plt.ylabel('Frequenze')
+    plt.ylabel('Frequenze [%]')
     dictionary = dictionary.items()
     dictionary = sorted(dictionary)
     x,y = zip(*dictionary)
