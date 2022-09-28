@@ -19,7 +19,9 @@
 
 import argparse
 import re
+import time
 import matplotlib.pyplot as plt
+
 
 
 
@@ -46,14 +48,19 @@ def histogram(dictionary):
     dictionary = sorted(dictionary)
     x,y = zip(*dictionary)
     plt.bar(x,y)
+    plt.savefig('freq.pdf')
     plt.show()
+    
 
 
 def find_frequency(file):
     """Trova la frequenza relativa delle lettere dell'input file e ne stampa il grafico a barre.
-
+    
+    Inoltre stampa in output il tempo necessario a trovare le frequenze relative.
+    
     Usato nella funzione process.
     """
+    start_time = time.time()
     letter_count = {}
     file = file.lower()
     n = float(len(file))
@@ -66,13 +73,16 @@ def find_frequency(file):
             else : letter_count[letter] = 1
     for letter in letter_count:
         letter_count[letter] = float(letter_count[letter]*100/n)
+    print("--- %s seconds ---" % (time.time() - start_time))
    # print(letter_count)
     histogram(letter_count)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Print some book statistics')
-    parser.add_argument('infile', type=str, help='path to the input file')
+    parser = argparse.ArgumentParser(description='Il programma trova le frequenze relative delle lettere presenti nel file di testo dato come input, le rappresenta in un grafico a barre e stampa il tempo trascorso per trovarle.')
+    parser.add_argument('infile', type=str, help='percorso all\'inputfile.')
     args = parser.parse_args()
     process(args.infile)
+
+    
     
      
