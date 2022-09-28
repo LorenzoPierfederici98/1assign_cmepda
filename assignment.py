@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 
 
 def process(file_path):
-    """
+    """Apre e legge il file dato da input e stampa il grafico a barre delle frequenze delle lettere nel file.
     """
     print(f'Opening input file {file_path}...')
     with open(file_path, 'r') as input_file:
@@ -35,7 +35,7 @@ def process(file_path):
     print('Done.')
 
 def histogram(dictionary):
-    """Mostra l'istogramma dei valori presenti in un dizionario.
+    """Mostra l'istogramma dei valori ordinati presenti in un dizionario.
 
     Usato nella funzione findefrequency.
     """
