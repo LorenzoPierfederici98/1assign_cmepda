@@ -22,7 +22,7 @@ def process(file_path):
             totale += number_lines(riga)
             r += 1     
 
-    print(f'Il numero di caratteri senza spazi è {totale}')
+    print(f'Il numero di caratteri compresi gli spazi è {totale-2}')
     print(f'Il numero di righe del testo è {r}')
     print('Done.')
 
