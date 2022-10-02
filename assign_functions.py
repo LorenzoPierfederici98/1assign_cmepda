@@ -1,4 +1,4 @@
-
+import logging 
 import re
 import time
 import matplotlib.pyplot as plt
@@ -13,11 +13,14 @@ def process(file_path):
     with open(file_path, 'r') as input_file:
         text = input_file.read()
         find_frequency(text)
+        input_file.seek(0)
+        lines = input_file.readlines()
+        print(lines)
         totale = 0
         r = 0
-        for riga in text:
-            totale = totale + number_lines(riga)
-            r = r+1
+        for riga in lines:
+            totale += number_lines(riga)
+            r += 1     
 
     print(f'Il numero di caratteri senza spazi è {totale}')
     print(f'Il numero di righe del testo è {r}')
@@ -38,8 +41,6 @@ def histogram(dictionary):
     plt.savefig('freq.pdf')
     plt.show()
     
-
-
 def find_frequency(file):
     """Trova la frequenza relativa delle lettere dell'input file e ne stampa il grafico a barre.
     
@@ -60,12 +61,11 @@ def find_frequency(file):
             else : letter_count[letter] = 1
     for letter in letter_count:
         letter_count[letter] = float(letter_count[letter]*100/n)
-    print("--- tempo trascorso : %s s ---" % (time.time() - start_time))
-   # print(letter_count)
+    print(f"--- tempo trascorso : {(time.time() - start_time)} s ---" )
     histogram(letter_count)
 
-def number_lines(s):
+def number_lines(strn):
     """Inserisce gli elementi di una stringa separati da spazi in una lista e ne restituisce la lunghezza.
     """
-    lista = str.split(s)
+    lista = re.split(r'',strn)
     return len(lista)
