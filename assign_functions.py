@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+"""Functions for the first assignment."""
+
 import logging 
 import re
 import time
@@ -30,14 +32,13 @@ def process(file_path):
         find_frequency(text)
         input_file.seek(0)
         lines = input_file.readlines()
-        print(lines)
+        righe = len(lines)
         totale = 0
-        r = len(lines)
         for riga in lines:
-            totale += number_lines(riga)    
+            totale += len(riga)    
 
-    print(f'Il numero di caratteri compresi gli spazi è {totale-2*(r-1)}')
-    print(f'Il numero di righe del testo è {r}')
+    print(f'Il numero di caratteri compresi gli spazi è {totale - 2*(righe-1)}')
+    print(f'Il numero di righe del testo è {righe}')
     print('Done.')
 
 def histogram(dictionary):
@@ -49,8 +50,8 @@ def histogram(dictionary):
     plt.ylabel('Frequenze [%]')
     dictionary = dictionary.items()
     dictionary = sorted(dictionary)
-    x,y = zip(*dictionary)
-    plt.bar(x,y)
+    lettere,frequenze = zip(*dictionary)
+    plt.bar(lettere, frequenze)
     plt.savefig('freq.pdf')
     plt.show()
     
@@ -74,10 +75,3 @@ def find_frequency(file):
         letter_count[letter] = float(letter_count[letter]*100/n)
     print(f"--- tempo trascorso : {(time.time() - start_time)} s ---" )
     histogram(letter_count)
-
-def number_lines(strn):
-    """Inserisce gli elementi di una stringa separati da spazi in una lista e ne restituisce 
-    la lunghezza."""
-
-    lista = re.split(r'',strn)
-    return len(lista)
