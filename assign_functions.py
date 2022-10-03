@@ -15,19 +15,19 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Functions for the first assignment."""
-
 import logging 
 import re
 import time
 import matplotlib.pyplot as plt
 
+logging.basicConfig(level = logging.INFO, format = '%(asctime)s:%(levelname)s:%(message)s')
 
 def process(file_path):
     """Apre e legge il file dato da input e stampa il grafico a barre delle frequenze delle lettere nel file.
     Stampa il numero di caratteri senza spazi e il numero di righe dell'inputi file."""
 
-    print(f'Opening input file {file_path}...')
-    with open(file_path, 'r') as input_file:
+    logging.info('Opening input file %s...',(file_path))
+    with open(file_path, 'r', encoding = 'utf-8') as input_file:
         text = input_file.read()
         find_frequency(text)
         input_file.seek(0)
@@ -36,10 +36,9 @@ def process(file_path):
         totale = 0
         for riga in lines:
             totale += len(riga)    
-
-    print(f'Il numero di caratteri compresi gli spazi è {totale - 2*(righe-1)}')
-    print(f'Il numero di righe del testo è {righe}')
-    print('Done.')
+    logging.info('Il numero di caratteri compresi gli spazi è %d',(totale - 2*(righe-1)))
+    logging.info('Il numero di righe del testo è %d',righe)
+    logging.info('Done.')
 
 def histogram(dictionary):
     """Mostra l'istogramma dei valori ordinati presenti in un dizionario.
@@ -73,5 +72,5 @@ def find_frequency(file):
             else : letter_count[letter] = 1
     for letter in letter_count:
         letter_count[letter] = float(letter_count[letter]*100/n)
-    print(f"--- tempo trascorso : {(time.time() - start_time)} s ---" )
+    logging.info("--- tempo trascorso : %f s ---",(time.time() - start_time))
     histogram(letter_count)
